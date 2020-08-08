@@ -1,0 +1,268 @@
+@font-face {
+    font-family: "Luckiest Guy";
+    src: url('LuckiestGuy-Regular.ttf')
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: #001
+}
+
+::-webkit-scrollbar-thumb {
+    background: #E83239;
+    border-radius: 8px
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: black;
+    min-height: 100%;
+    font-size: 20px;
+    font-family: "Luckiest Guy", sans-serif;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.wrap {
+    position: relative;
+    height: 100%;
+    min-height: 500px;
+    padding-bottom: 20px;
+}
+
+.game {
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-perspective: 500px;
+    perspective: 500px;
+    min-height: 100%;
+    height: 100%;
+}
+
+@-webkit-keyframes matchAnim {
+    0% {
+        background: #bcffcc;
+    }
+
+    100% {
+        background: black;
+    }
+}
+
+@keyframes matchAnim {
+    0% {
+        background: #bcffcc;
+    }
+
+    100% {
+        background: black;
+    }
+}
+
+.card {
+    float: left;
+    width: 16.66666%;
+    height: 25%;
+    padding: 5px;
+    text-align: center;
+    display: block;
+    -webkit-perspective: 500px;
+    perspective: 500px;
+    position: relative;
+    cursor: pointer;
+    z-index: 50;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+@media(max-width:800px) {
+    .card {
+        width: 33.33%;
+        height: 20%;
+    }
+}
+
+@media screen and (max-width:800px) and (orientation:landscape) {
+    .card {
+        width: 20%;
+        height: 35%;
+    }
+}
+
+.card .inside {
+    width: 100%;
+    height: 100%;
+    display: block;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: .4s ease-in-out;
+    transition: .25s ease-in-out;
+    background: black;
+}
+
+.card .inside.picked,
+.card .inside.matched {
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.card .inside.matched {
+    -webkit-animation: 1s matchAnim ease-in-out;
+    animation: 1s matchAnim ease-in-out;
+    -webkit-animation-delay: .4s;
+    animation-delay: .4s;
+}
+
+.card .front,
+.card .back {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+}
+
+.card .front img,
+.card .back img {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    max-height: 100%;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.5));
+}
+
+.card .front {
+    -webkit-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+}
+
+@media(max-width:800px) {
+    .card .front {
+        padding: 5px;
+    }
+}
+
+.card .back {
+    -webkit-transform: rotateX(0);
+    transform: rotateX(0);
+}
+
+@media(max-width:800px) {
+    .card .back {
+        padding: 10px;
+    }
+}
+
+.modal-overlay,
+.intro-modal-overlay {
+    background: #10151b;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+}
+
+.modal-overlay {
+    display: none;
+    background: #10151b77;
+}
+
+.modal,
+.intro-modal {
+    position: relative;
+    width: 500px;
+    height: 400px;
+    max-height: 90%;
+    max-width: 90%;
+    min-height: 380px;
+    margin: 0 auto;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    padding: 30px 10px;
+    color: lavender;
+}
+
+.intro-modal p {
+    text-align: center;
+}
+
+.closeBtn {
+    font-size: 48px;
+    line-height: 0;
+    float: right;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.closeBtn:hover,
+.closeBtn:focus {
+    color: #ffffff;
+}
+
+h2 {
+    margin: 20px 0;
+}
+
+a {
+    color: inherit;
+    text-underline-position: under;
+}
+
+li {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
+
+.modal .winner {
+    font-size: 80px;
+    text-align: center;
+    color: #f1f1f1;
+    text-shadow: 0px 3px 0 #123456;
+}
+
+@media(max-width:480px) {
+    .modal .winner {
+        font-size: 60px;
+    }
+}
+
+.modal .restart {
+    padding: 15px 30px;
+    display: block;
+    font-size: 30px;
+    border: none;
+    background: #f1f1f1;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#654321));
+    background: linear-gradient(#353232, #654321);
+    border: 1px solid #654321;
+    border-radius: 5px;
+    color: #f1f1f1;
+    text-shadow: 0px 1px 0 #123456;
+    cursor: pointer;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    outline: none;
+}
+
+.modal .restart:hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(#654321), to(#123456));
+    background: linear-gradient(#654321, #123456);
+}
