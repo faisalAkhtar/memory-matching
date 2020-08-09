@@ -184,7 +184,7 @@
 
     document.querySelector(".closeBtn").onclick = function(e) {
         e.preventDefault()
-        console.log(this.parentElement.parentElement.remove())
+        this.parentElement.parentElement.remove()
     }
 
 })();
