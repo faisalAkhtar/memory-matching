@@ -1,8 +1,10 @@
 (function () {
     var Memory = {
         init: function (cards) {
+            this.$noOfClicks = 0;
             this.$game = $(".game");
             this.$modal = $(".modal");
+            this.$initTime = new Date();
             this.$overlay = $(".modal-overlay");
             this.$restartButton = $("button.restart");
             this.cardsArray = $.merge(cards, cards);
@@ -28,6 +30,7 @@
             var _ = Memory;
             var $card = $(this);
             if (!_.paused && !$card.find(".inside").hasClass("matched") && !$card.find(".inside").hasClass("picked")) {
+                _.$noOfClicks++;
                 $card.find(".inside").addClass("picked");
                 if (!_.guess) {
                     _.guess = $(this).attr("data-id");
@@ -47,8 +50,30 @@
                 }
             }
         },
+        timeSpent: function () {
+            var sec = Math.abs(new Date() - this.$initTime)/1000
+
+            var hrs = Math.floor(sec / 3600)
+            sec -= hrs * 3600;
+
+            var min = Math.floor(sec / 60) %60
+            sec -= min * 60
+
+            sec = Math.floor(sec)
+
+            var diff = '';
+            if (hrs > 0) {
+              diff += (hrs === 1) ? `${hrs} hour, ` : `${hrs} hours, `;
+            }
+            diff += (min === 0 || min === 1) ? `${min} minutes, ` : `${min} minute, `;
+            diff += (sec === 0 || sec === 1) ? `${sec} seconds` : `${sec} second`; 
+
+            return diff;
+        },
         win: function () {
             this.paused = true;
+            document.querySelector("#clicks").innerHTML = Memory.timeSpent();
+            document.querySelector("#time").innerHTML = Memory.$noOfClicks;
             setTimeout(function () {
                 Memory.showModal();
                 Memory.$game.fadeOut();
