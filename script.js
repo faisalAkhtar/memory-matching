@@ -1,10 +1,8 @@
 (function () {
     var Memory = {
         init: function (cards) {
-            this.$noOfClicks = 0;
             this.$game = $(".game");
             this.$modal = $(".modal");
-            this.$initTime = new Date();
             this.$overlay = $(".modal-overlay");
             this.$restartButton = $("button.restart");
             this.cardsArray = $.merge(cards, cards);
@@ -15,6 +13,8 @@
             this.$cards = $(this.shuffle(this.cardsArray));
         },
         setup: function () {
+            this.$noOfClicks = 0;
+            this.$initTime = new Date();
             this.html = this.buildHTML();
             this.$game.html(this.html);
             this.$memoryCards = $(".card");
