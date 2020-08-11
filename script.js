@@ -72,8 +72,8 @@
         },
         win: function () {
             this.paused = true;
-            document.querySelector("#clicks").innerHTML = Memory.timeSpent();
-            document.querySelector("#time").innerHTML = Memory.$noOfClicks;
+            document.querySelector("#time").innerHTML = Memory.timeSpent();
+            document.querySelector("#clicks").innerHTML = Memory.$noOfClicks;
             setTimeout(function () {
                 Memory.showModal();
                 Memory.$game.fadeOut();
